@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f6f8" />
+  <title>StupidMonolog — CRM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="responsive.css" />
+  <script src="config.js"></script>
+  <script src="api.js"></script>
+</head>
+<body>
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="StupidMonolog"><span class="brand-mark"><i class="bi bi-intersect"></i></span><span class="brand-word">StupidMonolog</span></a>
+      <button class="workspace-switch"><span class="workspace-logo">N</span><span class="workspace-copy"><strong>Northstar Studio</strong><small>Рабочее пространство</small></span><i class="bi bi-chevron-expand"></i></button>
+      <div class="mode-label">Режим работы</div>
+      <div class="mode-switch" role="tablist" aria-label="Режим интерфейса"><button class="mode-option" data-mode="ai"><i class="bi bi-stars"></i> AI</button><button class="mode-option selected" data-mode="crm"><i class="bi bi-grid-1x2"></i> CRM</button></div>
+      <nav class="navigation" aria-label="Основная навигация">
+        <button class="nav-link" data-page="overview"><i class="bi bi-house-door"></i><span>Главная</span></button>
+        <button class="nav-link" data-page="inbox"><i class="bi bi-chat-square-text"></i><span>Диалоги</span><span class="nav-badge">8</span></button>
+        <div class="nav-caption">Клиенты и коммуникации</div>
+        <button class="nav-link" data-page="contacts"><i class="bi bi-people"></i><span>Контакты</span></button>
+        <button class="nav-link" data-page="pipeline"><i class="bi bi-kanban"></i><span>Сделки</span></button>
+        <button class="nav-link" data-page="campaigns"><i class="bi bi-send"></i><span>Рассылки</span></button>
+        <button class="nav-link" data-page="integrations"><i class="bi bi-plug"></i><span>Интеграции</span><span class="connected-indicator"></span></button>
+        <div class="nav-caption">Автоматизация</div>
+        <button class="nav-link" data-page="automation"><i class="bi bi-diagram-3"></i><span>Сценарии</span></button>
+        <button class="nav-link" data-page="accounting"><i class="bi bi-wallet2"></i><span>Бухгалтерия</span></button>
+      </nav>
+      <div class="sidebar-bottom"><div class="sync-status"><span class="sync-dot"></span><span><strong>Синхронизация активна</strong><small>Последняя проверка 2 мин назад</small></span><button class="icon-button" title="Обновить" data-action="sync"><i class="bi bi-arrow-repeat"></i></button></div><button class="nav-link" data-page="settings"><i class="bi bi-gear"></i><span>Настройки</span></button><div class="user-profile"><div class="user-avatar">МК</div><div class="user-copy"><strong>Мария Кузнецова</strong><small>Владелец</small></div><button class="icon-button" title="Меню профиля"><i class="bi bi-three-dots"></i></button></div></div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar"><div class="topbar-leading"><button class="icon-button mobile-menu" data-action="sidebar" title="Открыть меню"><i class="bi bi-list"></i></button><div class="breadcrumbs"><span>Northstar Studio</span><i class="bi bi-chevron-right"></i><strong id="crumb">Главная</strong></div></div><div class="topbar-tools"><label class="global-search"><i class="bi bi-search"></i><input id="searchInput" placeholder="Найти контакт, кампанию…" /><kbd>⌘ K</kbd></label><button class="icon-button" title="Справка"><i class="bi bi-question-circle"></i></button><button class="icon-button has-notice" title="Уведомления"><i class="bi bi-bell"></i></button><div class="top-avatar">МК</div></div></header>
+      <div id="pageRoot" class="page-root"></div>
+    </main>
+  </div>
+  <button class="chat-backdrop" data-action="close-context-chat" aria-label="Закрыть помощника"></button>
+  <button class="assistant-launcher" id="assistantLauncher" data-action="toggle-context-chat"><i class="bi bi-stars"></i><span>Помощник AI</span></button>
+  <aside class="assistant-panel" id="contextAssistant" aria-label="AI-помощник страницы" aria-hidden="true">
+    <header class="assistant-panel-head"><span class="assistant-panel-mark"><i class="bi bi-stars"></i></span><div><strong>Помощник AI</strong><small>Контекст текущей страницы</small></div><button class="icon-button" data-action="close-context-chat" title="Закрыть"><i class="bi bi-x-lg"></i></button></header>
+    <div class="assistant-context"><i class="bi bi-window"></i><span>Сейчас открыто: <strong id="assistantPageContext">Главная</strong></span></div>
+    <div class="assistant-panel-messages" id="contextChatMessages" aria-live="polite"></div>
+    <div class="assistant-panel-suggestions" id="contextChatSuggestions"></div>
+    <form class="assistant-panel-composer" id="contextChatForm"><textarea id="contextChatInput" placeholder="Спросите про эту страницу или опишите задачу…" rows="2"></textarea><div><span><i class="bi bi-info-circle"></i> AI подготовит действие для проверки</span><button class="button button-primary" type="submit" title="Отправить"><i class="bi bi-arrow-up"></i></button></div></form>
+  </aside>
+  <div class="modal-layer" id="modalLayer" aria-hidden="true"></div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
