@@ -1,0 +1,477 @@
+/* Responsive layout refinements */
+.sidebar {
+  height: 100vh;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-color: #536176 transparent;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.navigation,
+.sidebar-bottom {
+  flex-shrink: 0;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.topbar-leading,
+.topbar-tools,
+.breadcrumbs,
+.page-root,
+.page-heading,
+.heading-actions {
+  min-width: 0;
+}
+
+.breadcrumbs strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.currency-settings {
+  padding: 22px;
+}
+
+.currency-settings-head,
+.currency-rates-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.currency-settings-head h2,
+.currency-rates-head h3 {
+  margin: 0 0 4px;
+  font:
+    700 17px Manrope,
+    sans-serif;
+}
+
+.currency-settings-head p,
+.currency-rates-head p {
+  margin: 0;
+  color: #778293;
+  font-size: 12px;
+}
+
+.currency-rates-head {
+  margin-top: 22px;
+  padding-top: 19px;
+  border-top: 1px solid var(--line);
+}
+
+.currency-rates-head h3 {
+  font-size: 14px;
+}
+
+.currency-rates-head > span {
+  color: #828d9c;
+  font-size: 11px;
+  text-align: right;
+}
+
+.currency-rate-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 260px));
+  gap: 16px;
+  margin-top: 17px;
+}
+
+.currency-rate-grid .form-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #778293;
+  font-size: 12px;
+}
+
+.currency-rate-grid strong {
+  color: var(--ink);
+  font-size: 18px;
+}
+
+@media (min-width: 851px) and (max-width: 1150px) {
+  .topbar {
+    gap: 16px;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .topbar-leading {
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  .topbar-tools {
+    flex: 0 1 auto;
+  }
+
+  .global-search {
+    width: clamp(145px, 22vw, 230px);
+  }
+}
+
+@media (max-width: 1000px) {
+  .breadcrumbs > span,
+  .breadcrumbs > i {
+    display: none;
+  }
+
+  .breadcrumbs {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 850px) {
+  .topbar {
+    position: sticky;
+    isolation: isolate;
+    height: 60px;
+    gap: 8px;
+    padding: 0 16px;
+  }
+
+  .topbar-leading {
+    flex: 1 1 auto;
+    gap: 9px;
+    overflow: hidden;
+  }
+
+  .mobile-menu,
+  .topbar-tools > .icon-button,
+  .top-avatar {
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .mobile-menu {
+    display: inline-grid;
+    font-size: 19px;
+  }
+
+  .breadcrumbs {
+    flex: 1 1 auto;
+    font-size: 14px;
+  }
+
+  .breadcrumbs > span,
+  .breadcrumbs > i {
+    display: none;
+  }
+
+  .topbar-tools {
+    flex: 0 0 auto;
+    gap: 5px;
+    margin-left: auto;
+  }
+
+  .global-search {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+    justify-content: center;
+    padding: 0;
+    border-color: transparent;
+    background: transparent;
+    cursor: text;
+  }
+
+  .global-search input {
+    display: block;
+    flex: 0 0 0;
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    opacity: 0;
+  }
+
+  .global-search kbd {
+    display: none;
+  }
+
+  .global-search.search-open,
+  .global-search:focus-within {
+    position: absolute;
+    z-index: 6;
+    left: 62px;
+    right: 145px;
+    width: auto;
+    justify-content: flex-start;
+    padding: 0 10px;
+    border-color: var(--line-strong);
+    background: #fff;
+    box-shadow: 0 2px 8px #1e30421a;
+  }
+
+  .global-search.search-open input,
+  .global-search:focus-within input {
+    flex: 1 1 auto;
+    width: 100%;
+    opacity: 1;
+  }
+
+  .page-root {
+    padding: 22px 18px 36px;
+  }
+
+  .page-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .heading-actions {
+    flex-wrap: wrap;
+  }
+
+  .inbox-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .inbox-list {
+    max-height: 270px;
+    overflow: auto;
+  }
+
+  .conversation-view {
+    min-width: 0;
+    min-height: 520px;
+  }
+
+  .contact-aside {
+    display: none;
+  }
+
+  .kanban-board {
+    grid-template-columns: repeat(5, minmax(270px, 78vw));
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .ai-workspace {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    min-height: calc(100vh - 60px);
+    margin: -22px -18px -36px;
+  }
+
+  .ai-history,
+  .ai-context {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .topbar {
+    height: 58px;
+    padding: 0 10px;
+  }
+
+  .topbar-leading {
+    gap: 5px;
+  }
+
+  .mobile-menu,
+  .topbar-tools > .icon-button,
+  .top-avatar,
+  .global-search {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .breadcrumbs {
+    font-size: 13px;
+  }
+
+  .topbar-tools {
+    gap: 2px;
+  }
+
+  .global-search.search-open,
+  .global-search:focus-within {
+    left: 52px;
+    right: 112px;
+    height: 38px;
+  }
+
+  .page-root {
+    padding: 20px 14px 32px;
+  }
+
+  .billing-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .currency-settings-head,
+  .currency-rates-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .currency-settings {
+    padding: 16px;
+  }
+
+  .currency-rate-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 13px;
+  }
+
+  .currency-rates-head > span {
+    text-align: left;
+  }
+
+  .page-heading {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 17px;
+  }
+
+  .page-heading h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .heading-actions {
+    width: 100%;
+    margin-top: 3px;
+  }
+
+  .heading-actions .button {
+    min-height: 38px;
+  }
+
+  .metric-grid,
+  .billing-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .overview-grid,
+  .billing-overview-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .integration-grid,
+  .plan-grid,
+  .scenario-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .integration-toolbar,
+  .contacts-toolbar,
+  .campaign-list-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .filter-tabs {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .small-search {
+    width: 100%;
+  }
+
+  .campaign-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kanban-board {
+    grid-template-columns: repeat(5, minmax(260px, 86vw));
+    gap: 12px;
+    padding-bottom: 10px;
+  }
+
+  .inbox-list {
+    max-height: 230px;
+  }
+
+  .conversation-header {
+    gap: 8px;
+  }
+
+  .conversation-header .conversation-actions {
+    gap: 3px;
+  }
+
+  .conversation-actions .button {
+    width: 36px;
+    min-width: 36px;
+    padding: 0;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .conversation-actions .button i {
+    font-size: 16px;
+  }
+
+  .contact-detail-modal,
+  .modal {
+    width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
+    max-height: calc(100dvh - 20px);
+    overflow: auto;
+  }
+
+  .modal-layer {
+    padding: 10px;
+  }
+
+  .detail-header {
+    height: auto;
+    min-height: 65px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 14px;
+  }
+
+  .detail-header-actions {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .detail-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-info {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .assistant-launcher {
+    right: 12px;
+    bottom: 12px;
+    min-height: 46px;
+  }
+}
+
+@media (max-width: 380px) {
+  .topbar-tools > .icon-button[title="Справка"] {
+    display: none;
+  }
+
+  .global-search.search-open,
+  .global-search:focus-within {
+    right: 74px;
+  }
+
+  .page-root {
+    padding-right: 11px;
+    padding-left: 11px;
+  }
+}
